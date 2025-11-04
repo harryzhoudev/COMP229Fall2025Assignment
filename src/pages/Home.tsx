@@ -1,5 +1,3 @@
-import React from 'react';
-
 function home() {
   return (
     <div className='flex flex-col justify-center items-start h-[calc(100lvh-5rem)] px-20 gap-3 max-w-6xl mx-auto'>

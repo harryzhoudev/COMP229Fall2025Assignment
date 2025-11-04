@@ -1,6 +1,6 @@
 function about() {
   return (
-    <div className='flex flex-col justify-center items-center px-20 py-20 gap-8 max-w-6xl mx-auto min-h-[calc(100vh-5rem)]'>
+    <div className='flex flex-col justify-center items-center p-20 gap-8 max-w-6xl mx-auto min-h-[calc(100vh-5rem)]'>
       <div className='flex gap-8 md:flex-row flex-col justify-center items-center'>
         <div className='flex md:flex-1 flex-col gap-4 order-1 md:order-2'>
           <h1 className='font-bold font-dm text-4xl text-[#71C9CE]'>

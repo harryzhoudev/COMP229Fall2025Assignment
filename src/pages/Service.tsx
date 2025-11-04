@@ -9,7 +9,7 @@ import {
 function Service() {
   const [active, setActive] = useState<number | null>(null);
 
-  const divs = [
+  const serviceSections = [
     {
       id: 0,
       color: 'bg-[#CBF1F5]',
@@ -48,16 +48,14 @@ function Service() {
   };
 
   return (
-    <div
-      className='flex w-full h-screen 
-            flex-col 2xl:flex-row -mt-20 overflow-clip'
-    >
-      {divs.map((div) => (
+    <div className='flex w-full flex-col 2xl:flex-row overflow-clip min-h-[calc(100vh-5rem)]'>
+      {serviceSections.map((sec) => (
         <div
-          key={div.id}
-          onClick={() => handleClick(div.id)}
+          key={sec.id}
+          onClick={() => handleClick(sec.id)}
+          // tailwind does not do dynamic css injection for images, that's why it had to be rendered using in-line styles
           style={{
-            backgroundImage: `url(${div.bgImg})`,
+            backgroundImage: `url(${sec.bgImg})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -67,36 +65,44 @@ function Service() {
             flex items-center justify-center
             text-white font-bold text-xl
             relative
-            ${div.color}
+            ${sec.color}
             flex-1
-            ${active === div.id ? 'flex-5' : 'flex-1'}
+            ${active === sec.id ? 'flex-5' : 'flex-1'}
           `}
         >
+          {/* blur and darken for both active and non-active state */}
           <div
             className={`transition-all duration-500 absolute inset-0 backdrop-blur-sm  ${
-              active === div.id ? 'bg-black/60' : 'bg-black/20'
+              active === sec.id ? 'bg-black/60' : 'bg-black/20'
             } `}
           ></div>
           {/* Icon */}
           <span
-            className={`transition-opacity duration-500 absolute top-1/2 left-1/2 text-9xl transform -translate-x-1/2 -translate-y-1/2 ${
-              active === div.id ? 'opacity-15' : 'opacity-100'
+            style={{ fontSize: 'clamp(50px, 10vw, 100px)' }}
+            className={`transition-opacity duration-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
+              active === sec.id ? 'opacity-15' : 'opacity-100'
             }`}
           >
-            <FontAwesomeIcon icon={div.icon} />
+            <FontAwesomeIcon icon={sec.icon} />
           </span>
 
           {/* Text only shows when active */}
           <div
-            className={`absolute top-1/2 left-1/2 transition-opacity duration-500 text-center px-4 transform -translate-x-1/2 -translate-y-1/2 w-200 ${
-              active === div.id ? 'opacity-100' : 'opacity-0'
+            className={`absolute top-1/2 left-1/2 transition-opacity duration-500 text-center px-[8vw] max-w-5xl transform -translate-x-1/2 -translate-y-1/2 pointer-events-none w-full ${
+              active === sec.id ? 'opacity-100' : 'opacity-0'
             }`}
           >
-            <h2 className='font-dm text-3xl text-[#66b4b9] text-left px-20 '>
-              {div.title}
+            <h2
+              style={{ fontSize: 'clamp(24px, 3vw, 42px)' }}
+              className='font-dm text-[#66b4b9] text-left '
+            >
+              {sec.title}
             </h2>
-            <p className='font-dm text-left px-20 text-[#E3FDFD] max-w-200 mt-3 '>
-              {div.description}
+            <p
+              style={{ fontSize: 'clamp(16px, 1.5vw, 28px)' }}
+              className='font-dm text-left  text-[#E3FDFD] mt-3 '
+            >
+              {sec.description}
             </p>
           </div>
         </div>
